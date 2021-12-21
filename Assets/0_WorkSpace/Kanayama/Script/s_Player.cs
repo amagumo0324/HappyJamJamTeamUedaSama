@@ -32,13 +32,11 @@ public class s_Player : MonoBehaviour
                 {
                     check = Check.Success;
                     Debug.Log("ê¨å˜");
-                    check = Check.Null;
                 }
                 else if(Input.GetMouseButtonDown(0))
                 {
                     check = Check.Out;
                     Debug.Log("é∏îs");
-                    check = Check.Null;
                 }
                 
             }
@@ -49,18 +47,21 @@ public class s_Player : MonoBehaviour
                 {
                     check = Check.Success;
                     Debug.Log("ê¨å˜");
-                    check = Check.Null;
                 }
                 if (Input.GetMouseButtonDown(1))
                 {
                     check = Check.Out;
                     Debug.Log("é∏îs");
-                    check = Check.Null;
                 }
             }
             
         }
 
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        check = Check.Null;
     }
 
     // Update is called once per frame
