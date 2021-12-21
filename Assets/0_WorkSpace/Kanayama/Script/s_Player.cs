@@ -5,13 +5,11 @@ using UnityEngine;
 public class s_Player : MonoBehaviour
 {
     //tag受け取り用変数
-    GameObject T_safe;
-    GameObject T_out;
 
     enum Check
     {
         Null,
-        Safe,
+        Success,
         Out
     };
 
@@ -24,37 +22,50 @@ public class s_Player : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        //tag確認
-        if (collision.tag == "safe")
+        if(check == Check.Null)
         {
-
+            //tag確認
+            if (collision.tag == "safe")
+            {
+                //マウス右クリックで成功
+                if (Input.GetMouseButtonDown(1))
+                {
+                    check = Check.Success;
+                    Debug.Log("成功");
+                    check = Check.Null;
+                }
+                else if(Input.GetMouseButtonDown(0))
+                {
+                    check = Check.Out;
+                    Debug.Log("失敗");
+                    check = Check.Null;
+                }
+                
+            }
+            else if(collision.tag == "out")
+            {
+                //マウス左クリックで成功
+                if (Input.GetMouseButtonDown(0))
+                {
+                    check = Check.Success;
+                    Debug.Log("成功");
+                    check = Check.Null;
+                }
+                if (Input.GetMouseButtonDown(1))
+                {
+                    check = Check.Out;
+                    Debug.Log("失敗");
+                    check = Check.Null;
+                }
+            }
+            
         }
-        else if(collision.tag == "out")
-        {
 
-        }
-      
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        //マウス右クリック
-        if(Input.GetMouseButtonDown(1) && check == Check.Null)
-        {
-            check = Check.Safe;
-        }
-        //マウス左クリック
-        if(Input.GetMouseButtonDown(0) && check == Check.Null)
-        {
-            check = Check.Out;
-        }
-        else
-        {
-            check = Check.Null;
-        }
-
     }
 
 }
